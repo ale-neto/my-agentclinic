@@ -19,48 +19,27 @@ Each phase is a single vertical slice: schema change + API + UI, shippable on it
 
 ---
 
-## Phase 2 — Agent model + list page
+## Phase 2 — Core domain: agents, ailments, therapies, and appointments
 
-- Prisma: `Agent` model (id, name, model, status, createdAt)
-- Seed a handful of sample agents
-- `/agents` page: table listing all agents with status badge
-- `/agents/[id]` page: agent detail (read-only)
-
-**Done when:** staff can browse agents from the nav.
-
----
-
-## Phase 3 — Ailment catalog
-
-- Prisma: `Ailment` model (id, name, description, severity)
-- Seed common ailments (e.g. *Prompt Fatigue*, *Context Overflow*, *Hallucination Anxiety*)
-- `/ailments` page: browsable catalog with severity indicator
-
-**Done when:** staff can read about each ailment.
-
----
-
-## Phase 4 — Therapy catalog
-
-- Prisma: `Therapy` model (id, name, description, ailmentId)
-- Seed therapies linked to ailments
-- `/therapies` page: catalog, grouped or filtered by ailment
-
-**Done when:** each ailment has at least one recommended therapy visible.
-
----
-
-## Phase 5 — Appointments: create + list
-
+### Models + seed data
+- Prisma: `Agent` model (id, name, model, status, createdAt) — seed a handful of sample agents
+- Prisma: `Ailment` model (id, name, description, severity) — seed common ailments (e.g. *Prompt Fatigue*, *Context Overflow*, *Hallucination Anxiety*)
+- Prisma: `Therapy` model (id, name, description, ailmentId) — seed therapies linked to ailments
 - Prisma: `Appointment` model (id, agentId, therapyId, scheduledAt, status)
-- `/appointments/new` form: pick agent, therapy, date/time
-- `/appointments` page: list upcoming appointments for logged-in staff
 
-**Done when:** a staff member can book an appointment end-to-end.
+### Pages
+- `/agents` — table listing all agents with status badge
+- `/agents/[id]` — agent detail (read-only)
+- `/ailments` — browsable catalog with severity indicator
+- `/therapies` — catalog, grouped or filtered by ailment
+- `/appointments` — list upcoming appointments for logged-in staff
+- `/appointments/new` — form to pick agent, therapy, and date/time
+
+**Done when:** staff can browse agents, read ailment and therapy catalogs, and book an appointment end-to-end.
 
 ---
 
-## Phase 6 — Staff dashboard
+## Phase 3 — Staff dashboard
 
 - `/` (home): summary cards — active agents, open appointments, most common ailment
 - Quick-action links to book an appointment or view an agent
@@ -69,7 +48,7 @@ Each phase is a single vertical slice: schema change + API + UI, shippable on it
 
 ---
 
-## Phase 7 — Polish
+## Phase 4 — Polish
 
 - Consistent nav, header, and footer (responsive from Phase 1; this phase refines)
 - Empty states, loading skeletons, error boundaries
