@@ -23,8 +23,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center bg-gray-50 py-16">
-      <div className="w-full max-w-sm rounded-lg bg-white p-8 shadow">
+    <div className="flex items-center justify-center bg-gray-50 px-4 py-12 sm:py-16">
+      <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow sm:p-8">
         <h1 className="mb-6 text-2xl font-bold text-gray-900">AgentClinic — Staff Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

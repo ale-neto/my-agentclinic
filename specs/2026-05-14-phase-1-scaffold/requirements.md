@@ -14,13 +14,14 @@ The current repo is a bare TypeScript scaffold (`src/index.ts`, no framework, no
 - One seeded staff user for development login.
 - NextAuth.js credentials provider that authenticates against the `User` table.
 - A `/login` page and a stub `/dashboard` page (protected route).
+- Responsive layout shell and pages — usable on mobile (375 px) through desktop using Tailwind mobile-first breakpoints.
 
 ## Out of scope
 
 - Vercel deployment (deferred to a later phase).
 - Any domain models beyond `User` (Agent, Ailment, Therapy, Appointment come in later phases).
 - Email-based auth, OAuth, or role-based access control.
-- UI polish, responsive layout, or empty states.
+- UI polish and empty states.
 
 ## Locked decisions
 

@@ -7,7 +7,7 @@ export default async function DashboardPage() {
   if (!session) redirect('/login')
 
   return (
-    <div className="bg-gray-50 p-8">
+    <div className="bg-gray-50 p-4 sm:p-8">
       <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
       <p className="mt-2 text-gray-600">Welcome, {session.user?.name}</p>
     </div>

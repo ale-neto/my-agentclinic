@@ -2,6 +2,8 @@
 
 Each phase is a single vertical slice: schema change + API + UI, shippable on its own.
 
+**Cross-cutting requirement:** every page must be responsive (mobile → tablet → desktop) from Phase 1 onwards. Tailwind's mobile-first breakpoints (`sm:`, `md:`, `lg:`) are the standard approach; no page ships without working on a 375 px viewport.
+
 ---
 
 ## Phase 1 — Project scaffold
@@ -67,10 +69,9 @@ Each phase is a single vertical slice: schema change + API + UI, shippable on it
 
 ---
 
-## Phase 7 — Polish + responsive layout
+## Phase 7 — Polish
 
-- Consistent nav, header, and footer
-- Mobile-responsive breakpoints
+- Consistent nav, header, and footer (responsive from Phase 1; this phase refines)
 - Empty states, loading skeletons, error boundaries
 - Accessibility pass (semantic HTML, focus management)
 

@@ -26,6 +26,15 @@ Phase 1 is complete and ready to merge when all three checks below pass manually
 
 ---
 
+## 4. Pages are responsive
+
+- Open Chrome DevTools and switch to a 375 px mobile viewport.
+- Navigate to `/`, `/login`, and `/dashboard`.
+- No horizontal scrollbar appears on any page.
+- Text, buttons, and form inputs are legible and tappable without zooming.
+
+---
+
 ## Not required for merge
 
 - Vercel deployment (out of scope for Phase 1).

@@ -4,6 +4,7 @@
 
 - Full TypeScript end-to-end (Mary's requirement for reliability and type safety).
 - Attractive, modern UI that works well in a current browser (Steve's requirement).
+- Responsive design — every page must be usable on mobile, tablet, and desktop using Tailwind's mobile-first breakpoint system (`sm:`, `md:`, `lg:`).
 - Proven, popular stack with a large ecosystem — not experimental.
 
 ## Stack
@@ -18,6 +19,7 @@
 | Auth | NextAuth.js | Staff login with minimal setup; supports OAuth and credentials |
 | Deployment | Vercel | Zero-config for Next.js; preview deployments per branch |
 | Package manager | pnpm | Fast, disk-efficient |
+| Testing | Vitest | Fast unit/integration tests with native TypeScript support; used for spec validation |
 
 ## Project structure (top-level)
 
