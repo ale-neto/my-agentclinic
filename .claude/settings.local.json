@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm src/index.ts)",
+      "Bash(rm -f package-lock.json)",
+      "Bash(pnpm install *)"
+    ]
+  }
+}
