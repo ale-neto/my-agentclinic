@@ -14,3 +14,44 @@ model User {
   name         String
   createdAt    DateTime @default(now())
 }
+
+// AgentStatus: ACTIVE | INACTIVE | UNDER_OBSERVATION
+// Severity: LOW | MEDIUM | HIGH | CRITICAL
+// AppointmentStatus: SCHEDULED | COMPLETED | CANCELLED
+
+model Agent {
+  id           String        @id @default(cuid())
+  name         String
+  model        String
+  status       String        @default("ACTIVE")
+  createdAt    DateTime      @default(now())
+  appointments Appointment[]
+}
+
+model Ailment {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  severity    String
+  therapies   Therapy[]
+}
+
+model Therapy {
+  id           String        @id @default(cuid())
+  name         String
+  description  String
+  ailmentId    String
+  ailment      Ailment       @relation(fields: [ailmentId], references: [id])
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String   @id @default(cuid())
+  agentId     String
+  therapyId   String
+  scheduledAt DateTime
+  status      String   @default("SCHEDULED")
+  createdAt   DateTime @default(now())
+  agent       Agent    @relation(fields: [agentId], references: [id])
+  therapy     Therapy  @relation(fields: [therapyId], references: [id])
+}
