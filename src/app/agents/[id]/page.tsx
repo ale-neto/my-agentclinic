@@ -6,7 +6,9 @@ import { getAgentById } from '@/lib/agents'
 import { StatusBadge } from '@/components/StatusBadge'
 import { AppointmentStatusBadge } from '@/components/AppointmentStatusBadge'
 
-export default async function AgentDetailPage({ params }: { params: { id: string } }) {
+type Props = { params: { id: string } }
+
+export default async function AgentDetailPage({ params }: Props) {
   const session = await getServerSession(authOptions)
   if (!session) redirect('/login')
 

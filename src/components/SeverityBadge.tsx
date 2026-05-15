@@ -5,7 +5,9 @@ const styles: Record<string, string> = {
   CRITICAL: 'bg-red-100 text-red-800',
 }
 
-export function SeverityBadge({ severity }: { severity: string }) {
+type Props = { severity: string }
+
+export function SeverityBadge({ severity }: Props) {
   const cls = styles[severity] ?? 'bg-gray-100 text-gray-600'
   return (
     <span className={`inline-block shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${cls}`}>

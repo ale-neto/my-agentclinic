@@ -4,7 +4,9 @@ const styles: Record<string, string> = {
   CANCELLED: 'bg-gray-100 text-gray-500',
 }
 
-export function AppointmentStatusBadge({ status }: { status: string }) {
+type Props = { status: string }
+
+export function AppointmentStatusBadge({ status }: Props) {
   const cls = styles[status] ?? 'bg-gray-100 text-gray-600'
   return (
     <span className={`inline-block shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${cls}`}>

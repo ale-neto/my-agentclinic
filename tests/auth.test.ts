@@ -1,29 +1,26 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
+const mockFindUnique = vi.hoisted(() => vi.fn())
+const mockCompare = vi.hoisted(() => vi.fn())
+
 vi.mock('@/lib/prisma', () => ({
-  prisma: {
-    user: {
-      findUnique: vi.fn(),
-    },
-  },
+  prisma: { user: { findUnique: mockFindUnique } },
 }))
 
 vi.mock('bcryptjs', () => ({
-  default: {
-    compare: vi.fn(),
-  },
+  __esModule: true,
+  default: { compare: mockCompare },
 }))
 
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
-import bcrypt from 'bcryptjs'
 
-// Access the authorize callback from the CredentialsProvider
+// NextAuth v4 stores the user-provided authorize under provider.options.authorize;
+// provider.authorize itself is a no-op stub (always returns null).
 const provider = authOptions.providers[0] as any
 const authorize: (
   credentials: Record<string, string> | undefined,
   req: object
-) => Promise<unknown> = provider.authorize.bind(provider)
+) => Promise<unknown> = provider.options.authorize
 
 const seededUser = {
   id: 'user-1',
@@ -34,7 +31,7 @@ const seededUser = {
 }
 
 describe('authorize', () => {
-  beforeEach(() => vi.clearAllMocks())
+  beforeEach(() => vi.resetAllMocks())
 
   it('returns null when credentials are missing', async () => {
     expect(await authorize(undefined, {})).toBeNull()
@@ -43,21 +40,21 @@ describe('authorize', () => {
   })
 
   it('returns null when user is not found', async () => {
-    vi.mocked(prisma.user.findUnique).mockResolvedValue(null)
+    mockFindUnique.mockResolvedValue(null)
     const result = await authorize({ email: 'nobody@example.com', password: 'pass' }, {})
     expect(result).toBeNull()
   })
 
   it('returns null when password is wrong', async () => {
-    vi.mocked(prisma.user.findUnique).mockResolvedValue(seededUser)
-    vi.mocked(bcrypt.compare).mockResolvedValue(false as never)
+    mockFindUnique.mockResolvedValue(seededUser)
+    mockCompare.mockResolvedValue(false)
     const result = await authorize({ email: seededUser.email, password: 'wrongpass' }, {})
     expect(result).toBeNull()
   })
 
   it('returns user object on valid credentials', async () => {
-    vi.mocked(prisma.user.findUnique).mockResolvedValue(seededUser)
-    vi.mocked(bcrypt.compare).mockResolvedValue(true as never)
+    mockFindUnique.mockResolvedValue(seededUser)
+    mockCompare.mockResolvedValue(true)
     const result = await authorize({ email: seededUser.email, password: 'password123' }, {})
     expect(result).toEqual({ id: 'user-1', email: 'staff@agentclinic.dev', name: 'Staff Member' })
   })

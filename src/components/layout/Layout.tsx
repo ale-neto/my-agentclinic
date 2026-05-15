@@ -3,7 +3,9 @@ import { Header } from './Header'
 import { Main } from './Main'
 import { Footer } from './Footer'
 
-export function Layout({ children }: { children: React.ReactNode }) {
+type Props = { children: React.ReactNode }
+
+export function Layout({ children }: Props) {
   return (
     <div className="layout">
       <Header />

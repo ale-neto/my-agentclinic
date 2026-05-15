@@ -1,8 +1,10 @@
-import { describe, it, expect, afterAll } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { PrismaClient } from '@prisma/client'
+import path from 'path'
 
 // Requires: pnpm prisma migrate dev && pnpm prisma db seed
-const prisma = new PrismaClient()
+const dbUrl = `file:${path.resolve(__dirname, '..', 'prisma', 'dev.db').replace(/\\/g, '/')}`
+const prisma = new PrismaClient({ datasourceUrl: dbUrl })
 
 describe('database — seeded state', () => {
   afterAll(() => prisma.$disconnect())
