@@ -29,38 +29,63 @@ export default async function AppointmentsPage() {
       {appointments.length === 0 ? (
         <p className="mt-8 text-sm text-gray-500">No appointments yet.</p>
       ) : (
-        <div className="mt-6 overflow-x-auto rounded-lg border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Agent</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Therapy</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Ailment</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Date</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 bg-white">
-              {appointments.map((appt) => (
-                <tr key={appt.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 font-medium text-gray-900">
-                    <Link href={`/agents/${appt.agent.id}`} className="hover:text-indigo-600">
-                      {appt.agent.name}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-3 text-gray-700">{appt.therapy.name}</td>
-                  <td className="px-4 py-3 text-gray-500">{appt.therapy.ailment.name}</td>
-                  <td className="px-4 py-3 text-gray-500">
-                    {new Date(appt.scheduledAt).toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3">
-                    <AppointmentStatusBadge status={appt.status} />
-                  </td>
+        <>
+          {/* Mobile cards */}
+          <div className="mt-6 space-y-3 sm:hidden">
+            {appointments.map((appt) => (
+              <div key={appt.id} className="rounded-lg border border-gray-200 bg-white p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <Link
+                    href={`/agents/${appt.agent.id}`}
+                    className="font-medium text-gray-900 hover:text-indigo-600"
+                  >
+                    {appt.agent.name}
+                  </Link>
+                  <AppointmentStatusBadge status={appt.status} />
+                </div>
+                <p className="mt-1 text-sm text-gray-700">{appt.therapy.name}</p>
+                <p className="mt-0.5 text-xs text-gray-500">{appt.therapy.ailment.name}</p>
+                <p className="mt-2 text-xs text-gray-400">
+                  {new Date(appt.scheduledAt).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop table */}
+          <div className="mt-6 hidden overflow-x-auto rounded-lg border border-gray-200 sm:block">
+            <table className="min-w-full divide-y divide-gray-200 text-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Agent</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Therapy</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Ailment</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Date</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-gray-100 bg-white">
+                {appointments.map((appt) => (
+                  <tr key={appt.id} className="hover:bg-gray-50">
+                    <td className="px-4 py-3 font-medium text-gray-900">
+                      <Link href={`/agents/${appt.agent.id}`} className="hover:text-indigo-600">
+                        {appt.agent.name}
+                      </Link>
+                    </td>
+                    <td className="px-4 py-3 text-gray-700">{appt.therapy.name}</td>
+                    <td className="px-4 py-3 text-gray-500">{appt.therapy.ailment.name}</td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {new Date(appt.scheduledAt).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3">
+                      <AppointmentStatusBadge status={appt.status} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   )

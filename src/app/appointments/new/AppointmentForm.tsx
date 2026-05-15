@@ -1,19 +1,34 @@
 'use client'
 
 import { useState } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
 import { bookAppointment } from './actions'
 
 type Agent = { id: string; name: string; model: string }
 type Ailment = { id: string; name: string; severity: string }
 type Therapy = { id: string; name: string; ailmentId: string }
 
-interface Props {
+type Props = {
   agents: Agent[]
   ailments: Ailment[]
   therapies: Therapy[]
 }
 
+function SubmitButton() {
+  const { pending } = useFormStatus()
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full rounded bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60 sm:w-auto"
+    >
+      {pending ? 'Booking…' : 'Book appointment'}
+    </button>
+  )
+}
+
 export function AppointmentForm({ agents, ailments, therapies }: Props) {
+  const [error, action] = useFormState(bookAppointment, null)
   const [selectedAilmentId, setSelectedAilmentId] = useState('')
   const filteredTherapies = therapies.filter((t) => t.ailmentId === selectedAilmentId)
 
@@ -22,7 +37,13 @@ export function AppointmentForm({ agents, ailments, therapies }: Props) {
   const minValue = minDateTime.toISOString().slice(0, 16)
 
   return (
-    <form action={bookAppointment} className="space-y-5">
+    <form action={action} className="space-y-5">
+      {error && (
+        <p role="alert" className="rounded bg-red-50 px-4 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      )}
+
       <div>
         <label htmlFor="agentId" className="block text-sm font-medium text-gray-700">
           Agent
@@ -72,6 +93,7 @@ export function AppointmentForm({ agents, ailments, therapies }: Props) {
           Therapy
         </label>
         <select
+          key={selectedAilmentId}
           id="therapyId"
           name="therapyId"
           required
@@ -104,12 +126,7 @@ export function AppointmentForm({ agents, ailments, therapies }: Props) {
         />
       </div>
 
-      <button
-        type="submit"
-        className="w-full rounded bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 sm:w-auto"
-      >
-        Book appointment
-      </button>
+      <SubmitButton />
     </form>
   )
 }

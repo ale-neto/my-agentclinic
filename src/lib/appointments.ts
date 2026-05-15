@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
+export type AppointmentStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED'
+
 export function getAppointments() {
   return prisma.appointment.findMany({
     include: {

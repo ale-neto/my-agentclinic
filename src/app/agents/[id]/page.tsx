@@ -49,32 +49,51 @@ export default async function AgentDetailPage({ params }: Props) {
       {agent.appointments.length === 0 ? (
         <p className="mt-3 text-sm text-gray-500">No appointments booked yet.</p>
       ) : (
-        <div className="mt-3 overflow-x-auto rounded-lg border border-gray-200">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Therapy</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Ailment</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Date</th>
-                <th className="px-4 py-3 text-left font-medium text-gray-500">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 bg-white">
-              {agent.appointments.map((appt) => (
-                <tr key={appt.id}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{appt.therapy.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{appt.therapy.ailment.name}</td>
-                  <td className="px-4 py-3 text-gray-500">
-                    {new Date(appt.scheduledAt).toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3">
-                    <AppointmentStatusBadge status={appt.status} />
-                  </td>
+        <>
+          {/* Mobile cards */}
+          <div className="mt-3 space-y-3 sm:hidden">
+            {agent.appointments.map((appt) => (
+              <div key={appt.id} className="rounded-lg border border-gray-200 bg-white p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <span className="font-medium text-gray-900">{appt.therapy.name}</span>
+                  <AppointmentStatusBadge status={appt.status} />
+                </div>
+                <p className="mt-1 text-sm text-gray-500">{appt.therapy.ailment.name}</p>
+                <p className="mt-2 text-xs text-gray-400">
+                  {new Date(appt.scheduledAt).toLocaleString()}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop table */}
+          <div className="mt-3 hidden overflow-x-auto rounded-lg border border-gray-200 sm:block">
+            <table className="min-w-full divide-y divide-gray-200 text-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Therapy</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Ailment</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Date</th>
+                  <th className="px-4 py-3 text-left font-medium text-gray-500">Status</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-gray-100 bg-white">
+                {agent.appointments.map((appt) => (
+                  <tr key={appt.id}>
+                    <td className="px-4 py-3 font-medium text-gray-900">{appt.therapy.name}</td>
+                    <td className="px-4 py-3 text-gray-600">{appt.therapy.ailment.name}</td>
+                    <td className="px-4 py-3 text-gray-500">
+                      {new Date(appt.scheduledAt).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3">
+                      <AppointmentStatusBadge status={appt.status} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
 
       <div className="mt-6">
