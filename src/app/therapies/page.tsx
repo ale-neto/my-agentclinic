@@ -10,7 +10,20 @@ export default async function TherapiesPage() {
 
   const therapies = await getTherapies()
 
-  // Group by ailment
+  if (therapies.length === 0) {
+    return (
+      <div className="p-4 sm:p-8">
+        <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Therapy Catalog</h1>
+        <p className="mt-1 text-sm text-gray-500">
+          Evidence-based treatments, grouped by the ailment they address.
+        </p>
+        <p className="mt-8 text-sm italic text-gray-500">
+          No therapies on file. Agents are on their own.
+        </p>
+      </div>
+    )
+  }
+
   const grouped = therapies.reduce<Record<string, typeof therapies>>((acc, therapy) => {
     const key = therapy.ailment.id
     if (!acc[key]) acc[key] = []

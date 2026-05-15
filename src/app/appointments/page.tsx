@@ -27,7 +27,17 @@ export default async function AppointmentsPage() {
       </div>
 
       {appointments.length === 0 ? (
-        <p className="mt-8 text-sm text-gray-500">No appointments yet.</p>
+        <div className="mt-8">
+          <p className="text-sm italic text-gray-500">
+            No appointments scheduled. A suspiciously healthy cohort.
+          </p>
+          <Link
+            href="/appointments/new"
+            className="mt-3 inline-block rounded bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+          >
+            Book appointment
+          </Link>
+        </div>
       ) : (
         <>
           {/* Mobile cards */}
