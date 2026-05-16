@@ -58,9 +58,58 @@ Each phase is a single vertical slice: schema change + API + UI, shippable on it
 
 ---
 
+## Phase 5 — Feedback & discovery
+
+- Feedback form (submit a complaint, suggestion, or testimonial)
+- About us page with clinic address and embedded map
+
+**Done when:** visitors can leave feedback and find the clinic in the real world.
+
+**Status: complete** ✓ — 2026-05-16
+
+---
+
+## Phase 6 — Reviews
+
+- Custom reviews system: staff or agents can rate and review therapies after appointments
+- Review list visible on therapy detail pages
+
+**Done when:** a therapy page shows at least one review end-to-end.
+
+---
+
+## Phase 7 — Search & filtering
+
+- Search bar across agents, ailments, and therapies
+- Filter appointments by status; filter ailments by severity
+- Implemented via Prisma query params + server components (no external search service yet)
+
+**Done when:** staff can find any entity by name without scrolling through full lists.
+
+---
+
+## Phase 8 — Email & notifications
+
+- Booking confirmation email sent on appointment creation (Resend)
+- Reminder email 24 h before a scheduled appointment
+- Staff notification when an agent's status changes
+
+**Done when:** a real email lands in an inbox after booking.
+
+---
+
+## Phase 9 — Payments
+
+- Stripe Checkout integration for paid appointment tiers
+- Payment status reflected on appointment record
+- Basic billing history page for staff
+
+**Done when:** a real payment can be completed end-to-end in test mode.
+
+---
+
 ## Later (not yet scoped)
 
 - Agent self-registration flow
-- Email reminders for upcoming appointments
 - Therapy outcome tracking (did it help?)
 - Public-facing ailment/therapy pages (no login required)

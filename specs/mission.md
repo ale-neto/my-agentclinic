@@ -18,8 +18,11 @@ Behind every high-performing agent is a human who asks too much, changes require
 
 ## Target audience
 
-- **Course students** — learners studying spec-driven development with AI coding agents, using AgentClinic as a hands-on reference project.
-- **Conference developers** — developers giving AI coding demos at conference booths, who need a realistic, self-contained app to showcase agent-assisted workflows.
+- **AI/tech enthusiasts** — developers, researchers, and ML practitioners who recognize the cultural moment and appreciate the absurdity. They are the most likely to share and engage.
+
+## Project character
+
+AgentClinic is a portfolio/demo project that showcases full-stack engineering skill through this deadpan satirical premise. The app behaves like a real clinic SaaS; the joke lives in the content, not the UI. Keep humor dry and plausible across every surface: copy, domain naming, and UX flows.
 
 ## Tone
 

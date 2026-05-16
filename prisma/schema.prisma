@@ -55,3 +55,12 @@ model Appointment {
   agent       Agent    @relation(fields: [agentId], references: [id])
   therapy     Therapy  @relation(fields: [therapyId], references: [id])
 }
+
+// FeedbackType: COMPLAINT | SUGGESTION | TESTIMONIAL
+model Feedback {
+  id        String   @id @default(cuid())
+  type      String
+  message   String
+  name      String?
+  createdAt DateTime @default(now())
+}
