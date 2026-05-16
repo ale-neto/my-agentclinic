@@ -16,6 +16,16 @@ export default async function AgentsPage() {
       <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Agents</h1>
       <p className="mt-1 text-sm text-gray-500">All registered agents.</p>
 
+      {agents.length === 0 ? (
+        <p className="mt-8 text-sm text-gray-500">
+          No agents registered yet. Run{' '}
+          <code className="rounded bg-gray-100 px-1 py-0.5 font-mono text-xs">
+            pnpm prisma db seed
+          </code>{' '}
+          to get started.
+        </p>
+      ) : (
+        <>
       {/* Mobile cards */}
       <div className="mt-6 space-y-3 sm:hidden">
         {agents.map((agent) => (
@@ -76,6 +86,8 @@ export default async function AgentsPage() {
           </tbody>
         </table>
       </div>
+        </>
+      )}
     </div>
   )
 }
