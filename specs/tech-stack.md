@@ -32,6 +32,14 @@ public/       # Static assets
 specs/        # This directory — product constitution
 ```
 
+## Planned integrations (identified gaps)
+
+| Capability | Likely choice | Notes |
+|---|---|---|
+| Email / notifications | Resend | Booking confirmations and appointment reminders; minimal setup with Next.js |
+| Search / filtering | Prisma query + server components | Start with DB-level search; upgrade to Algolia if catalog grows large |
+| Payments / billing | Stripe | Paid appointments or subscriptions; Stripe Checkout for minimal integration surface |
+
 ## Database design (initial entities)
 
 - `Agent` — the patient (name, model, created\_at, status)

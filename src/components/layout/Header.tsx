@@ -3,11 +3,16 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { SignOutButton } from '@/components/SignOutButton'
 
-const navLinks = [
+const authLinks = [
   { href: '/agents', label: 'Agents' },
   { href: '/ailments', label: 'Ailments' },
   { href: '/therapies', label: 'Therapies' },
   { href: '/appointments', label: 'Appointments' },
+]
+
+const publicLinks = [
+  { href: '/feedback', label: 'Feedback' },
+  { href: '/about', label: 'About' },
 ]
 
 export async function Header() {
@@ -19,20 +24,28 @@ export async function Header() {
         <Link href="/" className="text-xl font-bold text-gray-900">
           AgentClinic
         </Link>
-        {session && (
-          <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
-            {navLinks.map(({ href, label }) => (
+        <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+          {session &&
+            authLinks.map(({ href, label }) => (
               <li key={href}>
                 <Link href={href} className="text-gray-600 hover:text-gray-900">
                   {label}
                 </Link>
               </li>
             ))}
+          {publicLinks.map(({ href, label }) => (
+            <li key={href}>
+              <Link href={href} className="text-gray-600 hover:text-gray-900">
+                {label}
+              </Link>
+            </li>
+          ))}
+          {session && (
             <li>
               <SignOutButton />
             </li>
-          </ul>
-        )}
+          )}
+        </ul>
       </nav>
     </header>
   )
