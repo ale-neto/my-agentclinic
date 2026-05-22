@@ -186,15 +186,6 @@ To run a security review of your branch:
 
 ---
 
-## Deployment
-
-The project deploys to [Vercel](https://vercel.com) with zero configuration for Next.js.
-
-1. Push your branch to GitHub
-2. Import the repo in Vercel
-3. Set the environment variables (`DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`)
-4. Deploy
-
 For SQLite in production, consider [Turso](https://turso.tech) (libSQL-compatible, edge-ready) as a drop-in upgrade from the local file database.
 
 ---
